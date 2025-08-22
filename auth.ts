@@ -19,7 +19,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         const result = signInSchema.safeParse(credentials);
 
         if (!result.success) {
-          throw new Error("Invalid credentials");
+          throw new Error("Credenciales no válidas");
         }
 
         const { email, password } = result.data;
@@ -31,13 +31,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         });
 
         if (!user) {
-          throw new Error("User not found");
+          throw new Error("Usuario no encontrado");
         }
 
         const passwordMatch = await comparePassword(password, user.password);
 
         if (!passwordMatch) {
-          throw new Error("Invalid password");
+          throw new Error("Contraseña no válida");
         }
 
         return {
