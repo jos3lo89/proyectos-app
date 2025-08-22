@@ -61,6 +61,7 @@ model Project {
   cell_phone              String?
   location                String?
   contractor              String?
+  project_ackground       String?
   suspension_start_date   DateTime?     @db.Date
   suspension_end_date     DateTime?     @db.Date
   rescheduled_end_date    DateTime?     @db.Date

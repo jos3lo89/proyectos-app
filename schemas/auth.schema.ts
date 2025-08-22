@@ -2,14 +2,18 @@ import { UserRole } from "@prisma/client";
 import { object, string, email, enum as enumz, infer as inferz } from "zod";
 
 export const signInSchema = object({
-  email: email(),
-  password: string().min(8),
+  email: email("Correo electrónico no válido"),
+  password: string().min(8, {
+    message: "La contraseña debe tener al menos 8 caracteres.",
+  }),
 });
 
 export const signUpSchema = object({
-  name: string().min(2),
-  email: email(),
-  password: string().min(8),
+  name: string().min(1, "El nombre es requerido"),
+  email: email("Correo electrónico no válido"),
+  password: string().min(8, {
+    message: "La contraseña debe tener al menos 8 caracteres.",
+  }),
   role: enumz(UserRole),
 });
 

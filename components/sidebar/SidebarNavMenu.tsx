@@ -1,4 +1,5 @@
 import { SidebarTrigger } from "@/components/ui/sidebar";
+import { ModeToggle } from "../ModeToggle";
 
 const SideBarNavMenu = () => {
   return (
@@ -7,6 +8,7 @@ const SideBarNavMenu = () => {
         <div className="flex gap-3 justify-center items-center">
           <SidebarTrigger className="-ml-1 cursor-pointer" />
         </div>
+        <ModeToggle />
       </div>
     </header>
   );

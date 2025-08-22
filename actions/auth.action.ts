@@ -11,7 +11,7 @@ export const signupAction = async (values: SignUpType) => {
 
   if (!success) {
     return {
-      error: "Invalid data",
+      error: "Credenciales no válidas",
     };
   }
 
@@ -23,7 +23,7 @@ export const signupAction = async (values: SignUpType) => {
 
   if (user) {
     return {
-      error: "User already exists",
+      error: "El usuario ya existe.",
     };
   }
 
