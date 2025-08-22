@@ -24,7 +24,24 @@ export const navItemsList = [
       },
       {
         title: "Registrar",
-        url: "/create-project",
+        url: "/projects/create",
+      },
+    ],
+  },
+
+  {
+    title: "Usuarios",
+    url: "#",
+    icon: UserPlus,
+    isActive: false,
+    items: [
+      {
+        title: "Listar",
+        url: "/users",
+      },
+      {
+        title: "Registrar",
+        url: "/signup",
       },
     ],
   },

@@ -1,6 +1,7 @@
 "use client";
 
 import { signinAction } from "@/actions/auth.action";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -13,7 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { signInSchema, SignInType } from "@/schemas/auth.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2 } from "lucide-react";
+import { Loader2, Terminal } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
@@ -45,19 +46,32 @@ const SigninForm = () => {
     });
   };
   return (
-    <div>
+    <div className="rounded-lg shadow-lg p-4">
       <Form {...signupForm}>
-        <form onSubmit={signupForm.handleSubmit(onSubmit)}>
+        <form
+          onSubmit={signupForm.handleSubmit(onSubmit)}
+          className="space-y-6"
+        >
           <FormField
             control={signupForm.control}
             name="email"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
+              <FormItem className="space-y-2">
+                <FormLabel htmlFor="email" className="text-sm font-medium ">
+                  Correo
+                </FormLabel>
                 <FormControl>
-                  <Input type="email" required {...field} />
+                  <Input
+                    id="email"
+                    type="email"
+                    autoComplete="on"
+                    required
+                    {...field}
+                    className="w-full px-3 py-2"
+                    placeholder="tu@email.com"
+                  />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-sm text-red-400" />
               </FormItem>
             )}
           />
@@ -66,22 +80,48 @@ const SigninForm = () => {
             control={signupForm.control}
             name="password"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Password</FormLabel>
+              <FormItem className="space-y-2">
+                <FormLabel htmlFor="password" className="text-sm font-medium ">
+                  Contraseña
+                </FormLabel>
                 <FormControl>
-                  <Input type="password" required {...field} />
+                  <Input
+                    type="password"
+                    id="password"
+                    autoComplete="off"
+                    required
+                    {...field}
+                    className="w-full px-3 py-2  "
+                    placeholder="••••••••"
+                  />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-sm text-red-400" />
               </FormItem>
             )}
           />
 
-          {error && <FormMessage>{error}</FormMessage>}
-          <Button disabled={isPending}>
-            {isPending ? <Loader2 className="animate-spin" /> : "Submit"}
+          <Button
+            disabled={isPending}
+            className="w-full font-medium py-2 px-4 flex items-center justify-center gap-2 cursor-pointer disabled:cursor-default"
+          >
+            {isPending ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin" />
+                Iniciando sesión...
+              </>
+            ) : (
+              "Iniciar Sesión"
+            )}
           </Button>
         </form>
       </Form>
+      {error && (
+        <Alert variant="destructive" className="mt-4">
+          <Terminal />
+          <AlertTitle>¡Atención!</AlertTitle>
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      )}
     </div>
   );
 };
