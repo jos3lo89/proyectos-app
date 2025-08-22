@@ -1,7 +1,6 @@
 import { auth } from "@/auth";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { CardContent, CardHeader } from "@/components/ui/card";
 import prisma from "@/lib/prisma";
 import { CalendarDays, Mail, Shield, User } from "lucide-react";
 import { redirect } from "next/navigation";
@@ -13,6 +12,8 @@ const ProfilePage = async () => {
     if (!session?.user.id) {
       redirect("/signin");
     }
+
+    await new Promise((resolve) => setTimeout(resolve, 5000));
 
     const user = await prisma.user.findUnique({
       where: {
