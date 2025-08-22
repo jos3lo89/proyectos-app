@@ -1,0 +1,86 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  // output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  manager
+  revisor
+}
+
+model User {
+  id              String            @id @default(cuid())
+  name            String
+  email           String            @unique
+  password        String
+  role            UserRole          @default(revisor)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  Project         Project[]
+  ProjectProgress ProjectProgress[]
+}
+
+enum ProjectStatus {
+  planificado
+  ejecucion
+  pausado
+  finalizado
+  paralizado
+  suspendido
+  liquidado
+  proceso_de_liquidacion
+}
+
+model Project {
+  id                      String        @id @default(cuid())
+  cui                     String        @unique
+  functional_division     String
+  name                    String
+  cost_liquidation        Decimal?
+  cost_supervision        Decimal?
+  start_date              DateTime?     @db.Date
+  original_end_date       DateTime?     @db.Date
+  current_progress        Decimal       @default(0.0)
+  status                  ProjectStatus @default(planificado)
+  supervisor              String?
+  resident                String?
+  execution_period        String?
+  email_executing_company String?
+  supervision_email       String?
+  cell_phone              String?
+  location                String?
+  contractor              String?
+  suspension_start_date   DateTime?     @db.Date
+  suspension_end_date     DateTime?     @db.Date
+  rescheduled_end_date    DateTime?     @db.Date
+
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  user            User              @relation(fields: [userId], references: [id])
+  userId          String
+  ProjectProgress ProjectProgress[]
+}
+
+model ProjectProgress {
+  id           String   @id @default(cuid())
+  description  String?
+  progress     Decimal
+  progressDate DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  user         User     @relation(fields: [userId], references: [id])
+  userId       String
+  project      Project  @relation(fields: [projectId], references: [id])
+  projectId    String
+}
