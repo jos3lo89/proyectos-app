@@ -1,5 +1,4 @@
 "use client";
-
 import { ProjectCardData } from "@/actions/project.action";
 import ProjectStatusBadge from "@/components/projects/ProjectStatusBadge";
 import { Button } from "@/components/ui/button";
@@ -11,14 +10,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+
 import { Progress } from "@/components/ui/progress";
 import Link from "next/link";
-
-type ProjectsCardProps = {
+type ProjectsCardRevisorProps = {
   projects: ProjectCardData;
 };
 
-const ProjectsCard = ({ projects }: ProjectsCardProps) => {
+const ProjectCardRevisor = ({ projects }: ProjectsCardRevisorProps) => {
   if (projects.length === 0) {
     return (
       <div className="text-center text-muted-foreground mt-12">
@@ -60,7 +59,7 @@ const ProjectsCard = ({ projects }: ProjectsCardProps) => {
           </CardContent>
           <CardFooter>
             <Button asChild variant="outline" className="w-full">
-              <Link href={`/projects/${project.id}`}>Ver Detalles</Link>
+              <Link href={`/revisor/projects/${project.id}`}>Ver Detalles</Link>
             </Button>
           </CardFooter>
         </Card>
@@ -68,4 +67,4 @@ const ProjectsCard = ({ projects }: ProjectsCardProps) => {
     </div>
   );
 };
-export default ProjectsCard;
+export default ProjectCardRevisor;

@@ -1,4 +1,11 @@
+import HeaderRevisor from "@/components/projects-revisor/HeaderRevisor";
+
 const RevisorLayout = ({ children }: { children: React.ReactNode }) => {
-  return <>{children}</>;
+  return (
+    <>
+      <HeaderRevisor />
+      {children}
+    </>
+  );
 };
 export default RevisorLayout;
