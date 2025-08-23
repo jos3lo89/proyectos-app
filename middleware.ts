@@ -36,8 +36,6 @@ export default auth((req: NextAuthRequest) => {
 
   // 3. Proteger rutas basado en el rol 'revisor'
   if (isLoggedIn && userRole === "revisor") {
-    // Si un revisor intenta acceder a cualquier ruta que no empiece con /revisor,
-    // se le redirige a su página por defecto.
     if (!pathname.startsWith("/revisor")) {
       return NextResponse.redirect(new URL(DEFAULT_REVISOR_REDIRECT, nextUrl));
     }
@@ -48,7 +46,6 @@ export default auth((req: NextAuthRequest) => {
     return NextResponse.redirect(new URL("/signin", nextUrl));
   }
 
-  // Si ninguna de las reglas anteriores se cumple, permite el acceso
   return NextResponse.next();
 });
 
