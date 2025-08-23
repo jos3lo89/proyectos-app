@@ -43,21 +43,9 @@ export default auth((req: NextAuthRequest) => {
     }
   }
 
-  // 4. Proteger rutas '/revisor' del 'manager'
-  if (isLoggedIn && userRole === "manager" && pathname.startsWith("/revisor")) {
-    return NextResponse.redirect(new URL(DEFAULT_MANAGER_REDIRECT, nextUrl));
-  }
-
-  // 5. Redirigir al login si el usuario no está autenticado y la ruta es protegida
+  // 4. Redirigir al login si el usuario no está autenticado y la ruta es protegida
   if (!isLoggedIn && !authRoutes.includes(pathname)) {
-    let callbackUrl = pathname;
-    if (nextUrl.search) {
-      callbackUrl += nextUrl.search;
-    }
-    const encodedCallbackUrl = encodeURIComponent(callbackUrl);
-    return NextResponse.redirect(
-      new URL(`/signin?callbackUrl=${encodedCallbackUrl}`, nextUrl)
-    );
+    return NextResponse.redirect(new URL("/signin", nextUrl));
   }
 
   // Si ninguna de las reglas anteriores se cumple, permite el acceso
