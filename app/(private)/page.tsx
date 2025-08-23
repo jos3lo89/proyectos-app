@@ -1,5 +1,3 @@
-// app/(private)/admin/page.tsx (o tu ruta para PrivatePage)
-
 import { getDashboardStats } from "@/actions/dashboard.action";
 import { ProjectStatusChart } from "@/components/dashboard/ProjectStatusChart";
 import { RecentProjectsList } from "@/components/dashboard/RecentProjectsList";
@@ -20,7 +18,6 @@ const PrivatePage = async () => {
 
   return (
     <div className="container mx-auto p-2 md:p-2 space-y-4">
-      {/* Sección de Tarjetas de Estadísticas */}
       <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-4">
         <StatCard
           title="Proyectos Totales"

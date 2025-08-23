@@ -16,20 +16,18 @@ export const RecentProjectsList = ({ projects }: RecentProjectsProps) => {
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-          {/* Si no hay proyectos, muestra un mensaje amigable */}
           {!projects || projects.length === 0 ? (
             <p className="text-sm text-muted-foreground">
               No hay proyectos recientes.
             </p>
           ) : (
-            // Aplicamos la solución aquí con `?.`
             projects?.map((project) => (
               <div
                 key={project.id}
                 className="flex items-center justify-between"
               >
                 <div>
-                  <p className="font-semibold truncate">{project.name}</p>
+                  <p className="font-semibold line-clamp-1">{project.name}</p>
                   <p className="text-xs text-muted-foreground">
                     Creado:{" "}
                     {new Date(project.createdAt).toLocaleDateString("es-PE")}
