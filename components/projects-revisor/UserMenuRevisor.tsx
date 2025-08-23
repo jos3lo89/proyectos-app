@@ -57,11 +57,7 @@ const UserMenuRevisor = ({ user, initials }: UserMenuRevisorProps) => {
 
         <DropdownMenuGroup>
           <DropdownMenuItem>
-            <Link
-              href="/revisor/profile"
-              className="flex items-center gap-2"
-              onClick={() => setOpen(false)}
-            >
+            <Link href="/revisor/profile" className="flex items-center gap-2">
               <User2 />
               <p>Mi Perfil</p>
             </Link>
