@@ -45,26 +45,26 @@ enum ProjectStatus {
 model Project {
   id                      String        @id @default(cuid())
   cui                     String        @unique
-  functional_division     String
   name                    String
-  cost_liquidation        Decimal?
-  cost_supervision        Decimal?
-  start_date              DateTime?     @db.Date
-  original_end_date       DateTime?     @db.Date
+  functional_division     String
   current_progress        Decimal       @default(0.0)
   status                  ProjectStatus @default(planificado)
   supervisor              String?
   resident                String?
   execution_period        String?
   email_executing_company String?
+  cost_liquidation        Decimal?
+  cost_supervision        Decimal?
+  start_date              DateTime?     @db.Date
+  original_end_date       DateTime?     @db.Date
   supervision_email       String?
   cell_phone              String?
-  location                String?
-  contractor              String?
-  project_ackground       String?
   suspension_start_date   DateTime?     @db.Date
   suspension_end_date     DateTime?     @db.Date
   rescheduled_end_date    DateTime?     @db.Date
+  contractor              String?
+  project_ackground       String?
+  location                String?
 
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt

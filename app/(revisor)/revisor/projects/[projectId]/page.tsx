@@ -1,12 +1,11 @@
 import { getProjectById } from "@/actions/project.action";
+import ProgressHistoryRevisor from "@/components/projects-revisor/ProgressHistoryRevisor";
+import { ProjectActionsRevisor } from "@/components/projects-revisor/ProjectActionsRevisor";
 import DetailPorject from "@/components/projects/DetailPorject";
-import ProgressHistory from "@/components/projects/ProgressHistory";
 import ProjectStatusBadge from "@/components/projects/ProjectStatusBadge";
 import { MapPin } from "lucide-react";
 
-import { ProjectActions } from "@/components/projects/ProjectActions";
-
-const ProjectDetailPage = async ({
+const ProjectDetailRevisorPage = async ({
   params,
 }: {
   params: Promise<{ projectId: string }>;
@@ -16,7 +15,7 @@ const ProjectDetailPage = async ({
   const project = await getProjectById(projectId);
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 p-8">
       <div className="text-center">
         <h3 className="text-sm font-normal lg:text-lg lg:font-semibold break-words">
           {project.name}
@@ -36,12 +35,11 @@ const ProjectDetailPage = async ({
         </div>
       </div>
 
-      <ProjectActions project={project} />
+      <ProjectActionsRevisor project={project} />
 
       <DetailPorject project={project} />
-      <ProgressHistory progresses={project.ProjectProgress} />
+      <ProgressHistoryRevisor progresses={project.ProjectProgress} />
     </div>
   );
 };
-
-export default ProjectDetailPage;
+export default ProjectDetailRevisorPage;
