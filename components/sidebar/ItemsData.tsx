@@ -1,4 +1,4 @@
-import { UserPlus, Home } from "lucide-react";
+import { UserPlus, Home, Box } from "lucide-react";
 
 export const organization = {
   name: "Proyectos",
@@ -15,7 +15,7 @@ export const navItemsList = [
   {
     title: "Proyecto",
     url: "#",
-    icon: UserPlus,
+    icon: Box,
     isActive: true,
     items: [
       {
