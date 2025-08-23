@@ -1,6 +1,6 @@
 "use server";
 
-import { signIn } from "@/auth";
+import { signIn, signOut as authSignOut } from "@/auth";
 import { hashPassword } from "@/lib/bcrypt";
 import prisma from "@/lib/prisma";
 import { SignInType, signUpSchema, SignUpType } from "@/schemas/auth.schema";
@@ -57,4 +57,8 @@ export const signinAction = async (values: SignInType) => {
     }
     return { error: "Error al iniciar sesión" };
   }
+};
+
+export const signOut = async () => {
+  await authSignOut();
 };
